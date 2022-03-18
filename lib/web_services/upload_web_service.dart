@@ -42,7 +42,7 @@ class UploadWebService {
         return null;
       }
     } catch (e) {
-      log(e.toString());
+      failureSnackBar(e.toString());
       debugPrint(e.toString());
       return null;
     }
@@ -76,6 +76,7 @@ class UploadWebService {
         return false;
       }
     } catch (e) {
+      failureSnackBar(e.toString());
       debugPrint(e.toString());
       return false;
     }

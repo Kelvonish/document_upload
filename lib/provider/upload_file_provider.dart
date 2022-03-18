@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter/cupertino.dart';
@@ -151,31 +150,9 @@ class UploadFileProvider extends ChangeNotifier {
       _accessTokenStorage.saveAccessToken(token);
       return token;
     } else {
+      //failureSnackBar("error getting tokens");
       log("Error getting token");
     }
-  }
-
-  uploadDocuments(BuildContext context, String filename) async {
-    uploadDocumentLoading = true;
-    notifyListeners();
-    String? token = await _accessTokenStorage.getAccessToken();
-    token ??= await generateAccessToken();
-    Uint8List? uploadZip = await generateZipFile();
-    if (uploadZip != null) {
-      bool state =
-          await _uploadWebService.uploadDocuments(token!, uploadZip, filename);
-      if (state) {
-        resetAllSelected();
-        showSuccessAlertDialog(context);
-      } else {
-        showErrorAlertDialog(
-            context, "Something went wrong! Could not upload the documents");
-      }
-      uploadDocumentLoading = false;
-      notifyListeners();
-    }
-    uploadDocumentLoading = false;
-    notifyListeners();
   }
 
   Future<Uint8List?> generateZipFile() async {
@@ -219,12 +196,36 @@ class UploadFileProvider extends ChangeNotifier {
 
       var bytes = encoder.encode(archive,
           level: Deflate.BEST_COMPRESSION, output: outputStream);
-      print(bytes);
 
       return Uint8List.fromList(bytes!);
     } catch (e) {
-      log(e.toString());
+      failureSnackBar(e.toString());
       return null;
     }
+  }
+
+  uploadDocuments(BuildContext context, String filename) async {
+    uploadDocumentLoading = true;
+    notifyListeners();
+    String? token = await _accessTokenStorage.getAccessToken();
+    token ??= await generateAccessToken();
+    Uint8List? uploadZip = await generateZipFile();
+    if (uploadZip != null) {
+      bool state =
+          await _uploadWebService.uploadDocuments(token!, uploadZip, filename);
+      if (state) {
+        resetAllSelected();
+        showSuccessAlertDialog(context);
+        uploadDocumentLoading = false;
+        notifyListeners();
+      } else {
+        showErrorAlertDialog(
+            context, "Something went wrong! Could not upload the documents");
+        uploadDocumentLoading = false;
+        notifyListeners();
+      }
+    }
+    uploadDocumentLoading = false;
+    notifyListeners();
   }
 }
