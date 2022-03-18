@@ -59,7 +59,15 @@ class UploadWebService {
       http.MultipartFile multipartFile =
           http.MultipartFile.fromBytes("data", file.toList());
       log("loaded bytes");
-      Map<String, String> headers = {"Authorization": "Bearer $token"};
+      Map<String, String> headers = {
+        "Authorization":
+            "Bearer $token", //"Content-Type": "application/x-www-form-urlencoded",
+        "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+        // Required for cookies, authorization headers with HTTPS
+        "Access-Control-Allow-Headers":
+            "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+        "Access-Control-Allow-Methods": "POST, OPTIONS"
+      };
       request.headers.addAll(headers);
       request.files.add(multipartFile);
 
