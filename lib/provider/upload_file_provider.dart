@@ -211,12 +211,14 @@ class UploadFileProvider extends ChangeNotifier {
   uploadDocuments(BuildContext context, String filename) async {
     uploadDocumentLoading = true;
     notifyListeners();
-    String? token = await _accessTokenStorage.getAccessToken();
-    token ??= await generateAccessToken();
+    //String? token = await _accessTokenStorage.getAccessToken();
+    //token ??= await generateAccessToken();
+    String token =
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImpTMVhvMU9XRGpfNTJ2YndHTmd2UU8yVnpNYyIsImtpZCI6ImpTMVhvMU9XRGpfNTJ2YndHTmd2UU8yVnpNYyJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTBmZjEtY2UwMC0wMDAwMDAwMDAwMDAvc2FmYXJpY29tbzM2NS5zaGFyZXBvaW50LmNvbUAxOWE0ZGIwNy02MDdkLTQ3NWYtYTUxOC0wZTNiNjk5YWM3ZDAiLCJpc3MiOiIwMDAwMDAwMS0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDBAMTlhNGRiMDctNjA3ZC00NzVmLWE1MTgtMGUzYjY5OWFjN2QwIiwiaWF0IjoxNjQ3ODQyMDYzLCJuYmYiOjE2NDc4NDIwNjMsImV4cCI6MTY0NzkyODc2MywiaWRlbnRpdHlwcm92aWRlciI6IjAwMDAwMDAxLTAwMDAtMDAwMC1jMDAwLTAwMDAwMDAwMDAwMEAxOWE0ZGIwNy02MDdkLTQ3NWYtYTUxOC0wZTNiNjk5YWM3ZDAiLCJuYW1laWQiOiJkNDc2MmNmOS1lNjU0LTRhMTUtYWRkNS1kNjA3NmE3MWMxZTdAMTlhNGRiMDctNjA3ZC00NzVmLWE1MTgtMGUzYjY5OWFjN2QwIiwib2lkIjoiZjFiNjJlNzAtOGQ5MS00MTAzLWIyNWUtOWEyNGQ0YTg5MDYxIiwic3ViIjoiZjFiNjJlNzAtOGQ5MS00MTAzLWIyNWUtOWEyNGQ0YTg5MDYxIiwidHJ1c3RlZGZvcmRlbGVnYXRpb24iOiJmYWxzZSJ9.B490gm_wdhrEN01oiHc3hlQViDQRt507zkSTBaIsc8MUArPRd71wpjNNzNfdiuviXlmgv7inzN_MwKAndkOwCdc58s7Bn0apCDCaZ5ahE44pZGW5_GW7Fyk-E3emX4_irMGyEpjIb3cVSOl_YL1193YlRfuMXd-393tw4edbQrSlN0RiQCbWZppNIunEQIZ9KZBL6Pm8JkZBatkVY-_mcJUnmgir7aNg_jg0KFlMpOG0jzMfVN5uL50WdBfl2OBeFqYtdFizQHSNizlQqPrGwTFegwvn_ZWsQhiZDMeTdUFi8jnIc_Q1phydchpED7eAsXhnJplzoCOrvYIQgBfJ6A";
     Uint8List? uploadZip = await generateZipFile();
     if (uploadZip != null) {
       bool state =
-          await _uploadWebService.uploadDocuments(token!, uploadZip, filename);
+          await _uploadWebService.uploadDocuments(token, uploadZip, filename);
       if (state) {
         resetAllSelected();
         showSuccessAlertDialog(context);
