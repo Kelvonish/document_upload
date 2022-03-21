@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:upload/storage/access_token_preference.dart';
 import 'package:upload/utils/alert_dialog.dart';
 import 'package:upload/utils/snackbars.dart';
@@ -62,6 +63,7 @@ class UploadFileProvider extends ChangeNotifier {
       }
     } else {
       // User canceled the picker
+      Fluttertoast.showToast(msg: "No file selected");
       failureSnackBar("No file selected");
     }
   }
@@ -113,6 +115,7 @@ class UploadFileProvider extends ChangeNotifier {
       notifyListeners();
     } else {
       // User canceled the picker
+      Fluttertoast.showToast(msg: "No file selected");
       failureSnackBar("No file selected");
     }
   }
@@ -199,6 +202,7 @@ class UploadFileProvider extends ChangeNotifier {
 
       return Uint8List.fromList(bytes!);
     } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
       failureSnackBar(e.toString());
       return null;
     }

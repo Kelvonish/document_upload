@@ -289,7 +289,7 @@ class _HomePageState extends State<HomePage> {
                             height: 64,
                           ),
                           Text(
-                            "2. Medical Insuarance",
+                            "2. Medical Insurance",
                             style: bodyStyleBold,
                           ),
                           const SizedBox(

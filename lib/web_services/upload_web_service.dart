@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:upload/utils/constants.dart';
 import 'package:upload/utils/snackbars.dart';
@@ -42,6 +43,7 @@ class UploadWebService {
         return null;
       }
     } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
       failureSnackBar(e.toString());
       debugPrint(e.toString());
       return null;
@@ -84,6 +86,7 @@ class UploadWebService {
         return false;
       }
     } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
       failureSnackBar(e.toString());
       debugPrint(e.toString());
       return false;
