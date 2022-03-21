@@ -24,6 +24,8 @@ class UploadWebService {
       final response = await http.post(
         Uri.parse(ACCESS_TOKEN_URL),
         headers: {
+          "accept": "application/json; odata=verbose",
+          "content-type": "application/json;odata=verbose",
           //"Content-Type": "application/x-www-form-urlencoded",
           "Access-Control-Allow-Origin":
               "*", // Required for CORS support to work

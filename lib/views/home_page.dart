@@ -446,6 +446,7 @@ class _HomePageState extends State<HomePage> {
                                           _emailController.text +
                                           ".zip";
                                       value.uploadDocuments(context, filename);
+                                      //value.generateZipFile();
                                     }
                                   }
                                 },
