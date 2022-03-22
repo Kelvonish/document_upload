@@ -8,8 +8,7 @@ String CLIENT_SECRET = "rNtyM7aFfZ3lkTaLxUtwZK0c/bhNgtoVO81xp6skhD0=";
 
 String GRANT_TYPE = "client_credentials";
 
-String ACCESS_TOKEN_URL =
-    "https://accounts.accesscontrol.windows.net/$TENANT_ID/tokens/OAuth/2/";
+String ACCESS_TOKEN_URL = "https://sharepointtoken.herokuapp.com/get-token";
 
 String UPLOAD_URL =
     "https://safaricomo365.sharepoint.com/sites/resources/_api/web/GetFolderByServerRelativeUrl('New Entrant Information')/Files/";

@@ -14,26 +14,16 @@ class UploadWebService {
   Future<String?> getAccessToken() async {
     try {
       log("Starting to get token");
-      var map = Map<String, dynamic>();
-
-      map["client_id"] = "$CLIENT_ID@$TENANT_ID";
-      map["client_secret"] = CLIENT_SECRET;
-      map["grant_type"] = GRANT_TYPE;
-      map["resource"] = RESOURCE;
+      var map = {
+        "client_id": "$CLIENT_ID@$TENANT_ID",
+        "client_secret": CLIENT_SECRET,
+        "grant_type": GRANT_TYPE,
+        "resource": RESOURCE,
+        "tenant_id": TENANT_ID
+      };
 
       final response = await http.post(
         Uri.parse(ACCESS_TOKEN_URL),
-        headers: {
-          "accept": "application/json; odata=verbose",
-          //"content-type": "application/json;odata=verbose",
-          "Content-Type": "application/x-www-form-urlencoded",
-          "Access-Control-Allow-Origin":
-              "*", // Required for CORS support to work
-          // Required for cookies, authorization headers with HTTPS
-          "Access-Control-Allow-Headers":
-              "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
-          "Access-Control-Allow-Methods": "POST, OPTIONS"
-        },
         body: map,
       );
       log("Gotten response");
