@@ -51,10 +51,7 @@ class _HomePageState extends State<HomePage> {
                               height: MediaQuery.of(context).size.height * 0.15,
                             ),
                           ),
-                          Image.asset(
-                            "assets/success.gif",
-                            height: MediaQuery.of(context).size.height * 0.3,
-                          ),
+
                           const SizedBox(
                             height: 16,
                           ),
