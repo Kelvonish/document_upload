@@ -24,7 +24,7 @@ class UploadWebService {
 
       final response = await http.post(
         Uri.parse(ACCESS_TOKEN_URL),
-        body: map,
+        body: json.encode(map),
       );
       log("Gotten response");
       var responseJson = json.decode(response.body.toString());
