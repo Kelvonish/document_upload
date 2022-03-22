@@ -65,7 +65,7 @@ showSuccessAlertDialog(BuildContext context) {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
-          "success.gif",
+          "assets/success.gif",
           height: MediaQuery.of(context).size.height * 0.3,
         ),
         const SizedBox(
