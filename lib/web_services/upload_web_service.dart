@@ -14,7 +14,7 @@ class UploadWebService {
   Future<String?> getAccessToken() async {
     try {
       log("Starting to get token");
-      var map = {
+      Map map = {
         "client_id": "$CLIENT_ID@$TENANT_ID",
         "client_secret": CLIENT_SECRET,
         "grant_type": GRANT_TYPE,
@@ -24,6 +24,10 @@ class UploadWebService {
 
       final response = await http.post(
         Uri.parse(ACCESS_TOKEN_URL),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
         body: json.encode(map),
       );
       log("Gotten response");
